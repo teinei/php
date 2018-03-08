@@ -1,14 +1,9 @@
-
-
-
-
-
 <!--
 //create db
 /*
 //CREATE DATABASE phpc2;
-GRANT ALL ON misc.* TO 'fred'@'localhost' IDENTIFIED BY 'zap';
-//GRANT ALL ON misc.* TO 'fred'@'127.0.0.1' IDENTIFIED BY 'zap';
+GRANT ALL ON phpc2.* TO 'fred'@'localhost' IDENTIFIED BY 'zap';
+GRANT ALL ON phpc2.* TO 'fred'@'127.0.0.1' IDENTIFIED BY 'zap';
 //*/
 
 //create table
@@ -32,7 +27,8 @@ INSERT INTO users (name,email,password) VALUES ('Glenn','gg@umich.edu','456');
 
 <?php
 
-$pdo = new PDO('mysql:host=localhost;port=8889;dbname=phpc2','fred','zap');
+$pdo = new PDO('mysql:host=localhost;port=3306;dbname=phpc2','fred','zap');
+//in windows the port is 3306, in mac its 8889, mamp -> reference -> ports
 $stmt = $pdo->query("SELECT * FROM users");
 while($row=$stmt->fetch(PDO::FETCH_ASSOC)){
 	print_r($row);
