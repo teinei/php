@@ -1,0 +1,55 @@
+/* CSS Document */
+body {  
+     background-color : #ffffff;
+     font-family      : Verdana, Arial, Garamond, san serif;  
+	 font-size        : 60%  
+	 margin-top       : 0.25cm;  
+	 margin-left      : 0.4cm;  
+}
+p {  
+     margin-top       : 0.3cm;  
+     margin-bottom    : 0.0cm;  
+}
+.btn {  
+     background-color : #CDCAB3;  
+	 cursor           : pointer;  
+	 color            : #666666;  
+	 text-align       : center;  
+	 font-weight      : bold;  
+}
+.css_cnt {  
+	 font-size        : 80%;  
+	 padding-right    : 5px;  
+	 padding-left     : 5px;  
+}
+.css_cnt2 {  
+	 font-size        : 80%;  
+	 padding-right    : 5px;  
+	 padding-left     : 5px;  
+}
+.css_hdr {  
+	 font-size        : 0.8em;  
+	 font-weight      : bold;  
+	 color            : #8b887b;  
+}
+.lsk_hd {  
+	 font-weight      : bold;  
+	 color            : #8b887b;  
+}
+.css_link {  
+	 font-size        : 70%;  
+	 color            : #5B8391;  
+	 text-decoration  : none;  
+	 padding-left     : 0.5cm;  
+}
+.css_hl  {
+    text-decoration  : underline;
+}
+.css_inst
+  {
+  font-size          : 80%;
+  padding-left       : 0.1cm;
+  }
+ 
+
+

@@ -1,0 +1,92 @@
+<?xml version="1.0" standalone="no" ?>
+<!-- created with L5 SCORM Producer 1.0.5 for Dreamweaver, 
+on Wed Apr 12 13:52:15 GMT-0700 (Pacific Daylight Time) 2006 --> 
+<manifest identifier="SCO_cc_bc_LSK" version="4_06" xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2" 
+	xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2 imscp_rootv1p1p2.xsd http://www.imsglobal.org/xsd/imsmd_rootv1p2p1 imsmd_rootv1p2p1.xsd http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">
+	<metadata>
+	<schema>ADL SCORM</schema>
+	<schemaversion>1.2</schemaversion>
+		<lom xmlns="http://www.imsglobal.org/xsd/imsmd_rootv1p2p1" >
+				<general>
+					<title>
+						<langstring>Language Guide - Cantonese - Basic Guide</langstring>
+					</title>
+					<catalogentry>
+						<catalog></catalog>
+						<entry><langstring xml:lang="en"></langstring></entry>
+					</catalogentry>
+					<description>
+						<langstring xml:lang="en"></langstring>
+					</description>
+					<keyword>
+						<langstring xml:lang="en"></langstring>
+					</keyword>
+				</general>
+				<lifecycle/>
+				<metametadata>
+					<metadatascheme>LOM-1.0</metadatascheme>
+				</metametadata>
+				<technical>
+					<format>text/html</format>
+					<location type="URI">http://www.digitalthink.com</location>
+				</technical>
+				<educational>
+					<typicallearningtime>
+						<datetime></datetime>
+					</typicallearningtime>
+				</educational>
+				<rights>
+					<cost>
+						<source>
+							<langstring xml:lang="x-none">LOM-WD6.1</langstring>
+						</source>
+						<value>
+							<langstring xml:lang="x-none">no</langstring>
+						</value>
+					</cost>
+					<copyrightandotherrestrictions>
+						<source>
+							<langstring xml:lang="x-none">LOM-WD6.1</langstring>
+						</source>
+						<value>
+							<langstring xml:lang="x-none">no</langstring>
+						</value>
+					</copyrightandotherrestrictions>
+					<description>
+						<langstring xml:lang="en"></langstring>
+					</description>
+				</rights>
+				<classification>
+					<purpose>
+						<source>
+							<langstring xml:lang="x-none">LOM-WD6.1</langstring>
+						</source>
+						<value>
+							<langstring xml:lang="x-none">Educational Objective</langstring>
+						</value>
+					</purpose>
+					<description>
+						<langstring xml:lang="en"></langstring>
+					</description>
+					<keyword>
+						<langstring xml:lang="en"></langstring>
+					</keyword>
+				</classification>
+		</lom>
+	</metadata>
+	<organizations default="SCO_cc_bc_LSK_ORG">
+		<organization identifier="SCO_cc_bc_LSK_ORG" structure="heirarchical">
+			<title>Language Guide - Cantonese - Basic Guide</title>
+			<item identifier="SCO_cc_bc_LSK" identifierref="SCO_cc_bc_LSK_IDREF" isvisible="true">
+				<title>Language Guide - Cantonese - Basic Guide</title>
+			</item>
+		</organization>
+	</organizations>
+	<resources>
+		<resource identifier="SCO_cc_bc_LSK_IDREF" type="webcontent" href="SCO_cc_bc_LSK.htm"  adlcp:scormtype="sco">
+			<file href="SCO_cc_bc_LSK.htm" />
+		</resource>
+	</resources>
+</manifest>

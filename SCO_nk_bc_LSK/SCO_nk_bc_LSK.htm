@@ -1,0 +1,281 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
+<html>
+<head>
+<title>Basic Language Guide - North Korean</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script language="JavaScript" type="text/JavaScript" defer>
+/*
+
+DLIFLC SCORM wrapper.
+
+ALL SCORM adapter API calls are made through this wrapper.
+
+Programmers:    Earl Schleske     <earl@umn.edu>;
+                Dr. Wendy Tu      <Wendy.Tu@monterey.army.mil>;
+                Eun-Ji Lee        <findlay0406@lycos.co.kr>;
+
+_GeneralException          = 101
+_ServerBusy                = 102
+_InvalidArgumentError      = 201
+_ElementCannotHaveChildren = 202
+_ElementIsNotAnArray       = 203
+_NotImplementedError       = 401
+_InvalidSetValue           = 402
+_ElementIsReadOnly         = 403
+_ElementIsWriteOnly        = 404
+_IncorrectDataType         = 405
+
+
+Data model elements used:
+=========================
+  r  cmi.core.student_name ............................ Last, First
+  rw cmi.core.score.raw ............................... 0..100
+   w cmi.core.exit .................................... |time-out|suspend|logout|
+  rw cmi.core.lesson_status ........................... |passed|failed|complete|incomplete|browsed|not attempted|
+  r  cmi.core.lesson_mode ............................. |browse|normal|review|
+   w cmi.core.session_time ............................ hh:mm:ss.ms
+  rW cmi.interactions.0.id ............................ don't use space (ORD-32)
+   w cmi.interactions.0.type
+   w cmi.interactions.0.result
+   w cmi.interactions.0.student_response .............. Text/HTML/utf-8
+  rw cmi.objectives.n.id .............................. don't use space (ORD-32)
+  rw cmi.objectives.n.status
+  rw cmi.objectives.n.raw_score ....................... 0..100
+=========================
+*/
+
+window.DSW = new DLIFLC_SCORM_WRAPPERAPI_class()
+
+function DLIFLC_SCORM_WRAPPERAPI_class()
+  {
+  var _NoError                   = 0
+  var _NotInitialized            = 301
+  var _Debug                     = false
+  var AH                         = null
+  var findAPITries               = 0
+  var start_time                 = new Date().getTime()
+  var _this                      = this
+	var SCO_done									 = false;
+  function findAPI(win)
+    {
+    findAPITries = 0
+    while ((win.API == null) && (win.parent != null) && (win.parent != win))
+      {
+      findAPITries++
+      if (findAPITries > 10)
+        {
+        alert( 'Error finding API -- too deeply nested.' )
+        return null
+        }
+      win = win.parent
+      }
+    return win.API
+    }
+  function getAPI( aa )
+    {
+    var theAPI = findAPI(window)
+    if ((theAPI == null) && (window.opener != null) && (typeof(window.opener) != 'undefined'))
+      theAPI = findAPI(window.opener)
+    if (theAPI == null)
+      {
+      //alert( 'Unable to find an API adapter for: ' + aa )
+      }
+    return theAPI
+    }
+  function getAPIHandle( aa )
+    {
+    if (AH == null)
+      AH = getAPI( aa )
+    return AH
+    }
+  function ChkErr( ok )
+    {
+    if (!ok)
+      {
+      var E = AH.LMSGetLastError()
+      ok = E != _NoError
+      if (!ok)
+        {
+        var D = AH.LMSGetErrorString(E)
+        if (_Debug)
+          D += '\r\n' + AH.LMSGetDiagnostic(null)
+        alert( D )
+        }
+      }
+    return ok
+    }
+  this.doLMSInitialize = function()
+    {
+    AH = getAPIHandle('doLMSInitialize')
+    var R = AH != null
+    if (R)
+      R = ChkErr( AH.LMSInitialize('') )
+    return R
+    }
+  this.doLMSFinish = function()
+    {
+    AH = getAPIHandle('doLMSFinish')
+    var R = AH != null
+    if (R)
+      R = ChkErr( AH.LMSFinish('') )
+    return R
+    }
+  this.doLMSGetValue = function( aa )
+    {
+    AH = getAPIHandle('doLMSGetValue')
+    var V = ''
+    if (AH)
+      {
+      V = AH.LMSGetValue( aa ) + ''
+      var E = AH.LMSGetLastError()
+      if (E != _NoError)
+        {
+        V = ''
+        alert( 'LMSGetValue(' + aa + ') failed.\r\n' +  AH.LMSGetErrorString(E) )
+        }
+      }
+    return V
+	}
+  this.doLMSSetValue = function( name, value )
+    {
+    AH = getAPIHandle('doLMSSetValue')
+    var R = AH != null
+    if (R)
+      R = ChkErr( AH.LMSSetValue( name, value ) )
+    return R
+    }
+  this.doLMSCommit = function()
+    {
+    AH = getAPIHandle('doLMSCommit')
+    var R = AH != null
+    if (R)
+      R = ChkErr( AH.LMSCommit('') )
+    return R
+    }
+  this.doLMSGetLastError = function()
+    {
+    AH = getAPIHandle('doLMSGetLastError')
+    return AH ? AH.LMSGetLastError() : _GeneralError
+    }
+  this.doLMSGetErrorString = function( a )
+    {
+    AH = getAPIHandle('doLMSGetErrorString')
+    return AH ? AH.LMSGetErrorString(a) : ''
+    }
+  this.doLMSGetDiagnostic = function(a)
+    {
+    AH = getAPIHandle('doLMSGetDiagnostic')
+    return AH ? AH.LMSGetDiagnostic(a)+'' : ''
+    }
+
+  this.doQuit = function()
+    {
+    function convertTotalSeconds(ts)
+      {
+      var sec = (ts % 60)
+      ts -= sec
+      var tmp = (ts % 3600)  //# of seconds in the total # of minutes
+      ts -= tmp              //# of seconds in the total # of hours
+      // convert seconds to conform to CMITimespan type (e.g. SS.00)
+      sec = Math.round(sec*100)/100
+      var strSec = new String(sec)
+      var strWholeSec = strSec
+      var strFractionSec = ''
+      if (strSec.indexOf('.') != -1)
+        {
+        strWholeSec =  strSec.substring(0, strSec.indexOf('.'))
+        strFractionSec = strSec.substring(strSec.indexOf('.')+1, strSec.length)
+        }
+       if (strWholeSec.length < 2)
+         strWholeSec = '0' + strWholeSec
+       strSec = strWholeSec
+       if (strFractionSec.length)
+         strSec = strSec+ '.' + strFractionSec
+       if ((ts % 3600) != 0 )
+         var hour = 0
+       else
+         var hour = (ts / 3600)
+       if ((tmp % 60) != 0)
+         var min = 0
+       else
+         var min = (tmp / 60)
+       if ((new String(hour)).length < 2)
+         hour = '0' + hour
+       if ((new String(min)).length < 2)
+         min = '0' + min
+       return hour + ':' + min + ':' + strSec
+      }
+    function computeTime()
+      {
+      var current_time   = new Date().getTime()
+      var elapsedSeconds = (current_time - start_time) / 1000
+      var formattedTime  = convertTotalSeconds( elapsedSeconds )
+      _this.doLMSSetValue( 'cmi.core.session_time', formattedTime )
+      }
+    
+    if (!SCO_done)
+      {
+      computeTime()
+      this.doLMSSetValue( 'cmi.core.lesson_status', 'completed' )
+      this.doLMSCommit()
+      this.doLMSFinish()
+      }
+    SCO_done = true
+    }//doQuit
+
+
+  this.pg_unload = function()
+    {
+    if (!SCO_done)
+      this.doQuit()
+    }
+
+
+  this.pg_load = function( nn )
+    {
+   		this.doLMSInitialize();
+    }
+
+
+ 
+}
+</script>
+<script language="JavaScript">
+//=========================================================================
+function initActy()
+  {
+  }
+
+function xid( a )
+  {
+  return document.getElementById( a )
+  }
+
+function pageReload()
+  {
+  window.location.reload()
+  }
+
+window.onload = function()
+  {
+  if (window.DSW)
+    DSW.pg_load()
+  initActy()
+  }
+window.onunload = function()
+  {
+  if (window.DSW)
+    DSW.pg_unload()
+  }
+
+//=========================================================================
+</script>
+</head>
+
+<frameset rows="1,*" frameborder="no" border="0" framespacing="0">
+  <frame src="blank.htm" name="topFrame" scrolling="NO" noresize >
+    <frame src="nk_bc_LSK/default.html" name="mainFrame">
+</frameset>
+<noframes><body>
+</body></noframes>
+</html>

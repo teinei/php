@@ -1,0 +1,448 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
+<html>
+<head>
+<title>Language Guide - Cantonese</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script language="JavaScript" type="text/JavaScript" defer>
+/*
+
+DLIFLC SCORM wrapper.
+
+ALL SCORM adapter API calls are made through this wrapper.
+
+Programmers:    Earl Schleske     <earl@umn.edu>;
+                Dr. Wendy Tu      <Wendy.Tu@monterey.army.mil>;
+                Eun-Ji Lee        <findlay0406@lycos.co.kr>;
+
+_GeneralException          = 101
+_ServerBusy                = 102
+_InvalidArgumentError      = 201
+_ElementCannotHaveChildren = 202
+_ElementIsNotAnArray       = 203
+_NotImplementedError       = 401
+_InvalidSetValue           = 402
+_ElementIsReadOnly         = 403
+_ElementIsWriteOnly        = 404
+_IncorrectDataType         = 405
+
+
+Data model elements used:
+=========================
+  r  cmi.core.student_name ............................ Last, First
+  rw cmi.core.score.raw ............................... 0..100
+   w cmi.core.exit .................................... |time-out|suspend|logout|
+  rw cmi.core.lesson_status ........................... |passed|failed|complete|incomplete|browsed|not attempted|
+  r  cmi.core.lesson_mode ............................. |browse|normal|review|
+   w cmi.core.session_time ............................ hh:mm:ss.ms
+  rW cmi.interactions.0.id ............................ don't use space (ORD-32)
+   w cmi.interactions.0.type
+   w cmi.interactions.0.result
+   w cmi.interactions.0.student_response .............. Text/HTML/utf-8
+  rw cmi.objectives.n.id .............................. don't use space (ORD-32)
+  rw cmi.objectives.n.status
+  rw cmi.objectives.n.raw_score ....................... 0..100
+=========================
+*/
+
+window.DSW = new DLIFLC_SCORM_WRAPPERAPI_class()
+
+function DLIFLC_SCORM_WRAPPERAPI_class()
+  {
+  var _NoError                   = 0
+  var _NotInitialized            = 301
+  var _Debug                     = false
+  var AH                         = null
+  var findAPITries               = 0
+  var start_time                 = new Date().getTime()
+  var passing_score              = 40
+  var SCO_done                   = false
+  var score_exists               = false
+  var activity_score             = null
+  var activity_status            = []
+  var _this                      = this
+  function findAPI(win)
+    {
+    findAPITries = 0
+    while ((win.API == null) && (win.parent != null) && (win.parent != win))
+      {
+      findAPITries++
+      if (findAPITries > 10)
+        {
+        alert( 'Error finding API -- too deeply nested.' )
+        return null
+        }
+      win = win.parent
+      }
+    return win.API
+    }
+  function getAPI( aa )
+    {
+    var theAPI = findAPI(window)
+    if ((theAPI == null) && (window.opener != null) && (typeof(window.opener) != 'undefined'))
+      theAPI = findAPI(window.opener)
+    if (theAPI == null)
+      {
+      //alert( 'Unable to find an API adapter for: ' + aa )
+      }
+    return theAPI
+    }
+  function getAPIHandle( aa )
+    {
+    if (AH == null)
+      AH = getAPI( aa )
+    return AH
+    }
+  function ChkErr( ok )
+    {
+    if (!ok)
+      {
+      var E = AH.LMSGetLastError()
+      ok = E != _NoError
+      if (!ok)
+        {
+        var D = AH.LMSGetErrorString(E)
+        if (_Debug)
+          D += '\r\n' + AH.LMSGetDiagnostic(null)
+        alert( D )
+        }
+      }
+    return ok
+    }
+  this.doLMSInitialize = function()
+    {
+    AH = getAPIHandle('doLMSInitialize')
+    var R = AH != null
+    if (R)
+      R = ChkErr( AH.LMSInitialize('') )
+    return R
+    }
+  this.doLMSFinish = function()
+    {
+    AH = getAPIHandle('doLMSFinish')
+    var R = AH != null
+    if (R)
+      R = ChkErr( AH.LMSFinish('') )
+    return R
+    }
+  this.doLMSGetValue = function( aa )
+    {
+    AH = getAPIHandle('doLMSGetValue')
+    var V = ''
+    if (AH)
+      {
+      V = AH.LMSGetValue( aa ) + ''
+      var E = AH.LMSGetLastError()
+      if (E != _NoError)
+        {
+        V = ''
+        alert( 'LMSGetValue(' + aa + ') failed.\r\n' +  AH.LMSGetErrorString(E) )
+        }
+      }
+    return V
+	}
+  this.doLMSSetValue = function( name, value )
+    {
+    AH = getAPIHandle('doLMSSetValue')
+    var R = AH != null
+    if (R)
+      R = ChkErr( AH.LMSSetValue( name, value ) )
+    return R
+    }
+  this.doLMSCommit = function()
+    {
+    AH = getAPIHandle('doLMSCommit')
+    var R = AH != null
+    if (R)
+      R = ChkErr( AH.LMSCommit('') )
+    return R
+    }
+  this.doLMSGetLastError = function()
+    {
+    AH = getAPIHandle('doLMSGetLastError')
+    return AH ? AH.LMSGetLastError() : _GeneralError
+    }
+  this.doLMSGetErrorString = function( a )
+    {
+    AH = getAPIHandle('doLMSGetErrorString')
+    return AH ? AH.LMSGetErrorString(a) : ''
+    }
+  this.doLMSGetDiagnostic = function(a)
+    {
+    AH = getAPIHandle('doLMSGetDiagnostic')
+    return AH ? AH.LMSGetDiagnostic(a)+'' : ''
+    }
+
+
+
+
+
+
+
+  this.doQuit = function( status )
+    {
+    function convertTotalSeconds(ts)
+      {
+      var sec = (ts % 60)
+      ts -= sec
+      var tmp = (ts % 3600)  //# of seconds in the total # of minutes
+      ts -= tmp              //# of seconds in the total # of hours
+      // convert seconds to conform to CMITimespan type (e.g. SS.00)
+      sec = Math.round(sec*100)/100
+      var strSec = new String(sec)
+      var strWholeSec = strSec
+      var strFractionSec = ''
+      if (strSec.indexOf('.') != -1)
+        {
+        strWholeSec =  strSec.substring(0, strSec.indexOf('.'))
+        strFractionSec = strSec.substring(strSec.indexOf('.')+1, strSec.length)
+        }
+       if (strWholeSec.length < 2)
+         strWholeSec = '0' + strWholeSec
+       strSec = strWholeSec
+       if (strFractionSec.length)
+         strSec = strSec+ '.' + strFractionSec
+       if ((ts % 3600) != 0 )
+         var hour = 0
+       else
+         var hour = (ts / 3600)
+       if ((tmp % 60) != 0)
+         var min = 0
+       else
+         var min = (tmp / 60)
+       if ((new String(hour)).length < 2)
+         hour = '0' + hour
+       if ((new String(min)).length < 2)
+         min = '0' + min
+       return hour + ':' + min + ':' + strSec
+      }
+    function computeTime()
+      {
+      var current_time   = new Date().getTime()
+      var elapsedSeconds = (current_time - start_time) / 1000
+      var formattedTime  = convertTotalSeconds( elapsedSeconds )
+      _this.doLMSSetValue( 'cmi.core.session_time', formattedTime )
+      }
+    function score_me()
+      {
+      var total_score = 0
+      var L           = activity_score.length
+      for (var i=0; i<L; i++)
+        total_score += activity_score[i]
+      total_score = parseInt(Math.round(total_score / L))
+      _this.doLMSSetValue( 'cmi.core.score.raw',     total_score )
+      _this.doLMSSetValue( 'cmi.core.lesson_status', total_score>=passing_score ? 'passed' : 'failed' )
+      }
+    function status_me()
+      {
+      var myStatus   = null
+      var L          = activity_status.length
+      for (var i=0; i<L; i++)
+        if (activity_status[i])
+          if (gv_q != 0 )
+            myStatus = L >= parseInt(Math.round(gv_q/2))? 'completed' : 'incomplete'
+          else
+            myStatus = activity_status[i]== 'completed' ? 'completed' : 'incomplete'
+      _this.doLMSSetValue( 'cmi.core.lesson_status', myStatus)
+      }
+    function score_ready()
+      {
+      var ready = true
+      var L=activity_score.length
+      for (var i=0, L=activity_score.length; i<L; i++)
+        ready = ready && (activity_score[i] >= 0)
+      return ready
+      }
+    function status_ready()
+      {
+      var stat = false
+      if (activity_status.length)
+        {
+        stat = true
+        for (var i=0, L=activity_status.length; i<L; i++)
+          stat = stat && (activity_status[i])
+        }  
+      return stat
+      }
+    if (!SCO_done)
+      {
+      computeTime()
+      if (status)
+        this.doLMSSetValue( 'cmi.core.lesson_status', status )
+      else if (activity_score == null)
+        this.doLMSSetValue( 'cmi.core.lesson_status', 'browsed' )
+      else if (score_ready())
+        score_me()
+      else if (status_ready())
+        status_me()
+      else
+        this.doLMSSetValue( 'cmi.core.lesson_status', 'incomplete' )
+      this.doLMSCommit()
+      this.doLMSFinish()
+      }
+    SCO_done = true
+    }//doQuit
+
+
+  this.pg_unload = function()
+    {
+    if (!SCO_done)
+      this.doQuit()
+    }
+
+
+  this.pg_load = function( nn )
+    {
+    if (this.doLMSInitialize())
+      {
+      if (false)
+        {
+        var d      = this.doLMSGetValue( 'cmi.core.entry')//ab-initio
+        alert( status + ' :: ' + d )
+        }
+      var status = this.doLMSGetValue( 'cmi.core.lesson_status' )
+      var d      = this.doLMSGetValue( 'cmi.core.entry')//ab-initio
+      if (status == 'not attempted')
+        this.doLMSSetValue( 'cmi.core.lesson_status', 'incomplete' )
+      SCO_done = false
+      start_time = new Date().getTime()
+      if (nn)
+        activity_score = new Array( nn )
+      else if (nn == 0)
+        activity_score = new Array()
+
+      if (false)
+        {
+        //counting how many times the SCO was launched and recording the time of last entry
+        var launch_cnt = 0
+        var obj0_status = this.doLMSGetValue( 'cmi.objectives.0.status' )
+        if (obj0_status == 'not attempted')
+          launch_cnt = 1
+        else
+          {
+          launch_cnt = this.doLMSGetValue( 'cmi.objectives.0.score.raw')
+          launch_cnt++
+          }
+        DSW.objective( 0, 'launched_this_many_times', 4, launch_cnt )
+        //time and date of user's last visit
+        var d = new Date()
+        var monthname=new Array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec")
+        var dd = d.getDate() + "_" + monthname[d.getMonth()] + "_" + d.getFullYear() + "_" + d.getHours() + ":" + d.getMinutes()
+        DSW.objective( 1, dd, 4, null )
+        }
+      }
+
+    }//pg_load
+
+
+  this.set_passing_score = function( n )
+    {
+    passing_score = n
+    }
+
+  this.set_score_exists = function( flag )
+    {
+    score_exists = flag
+    }
+
+
+
+  this.interaction = function( a_id, a_type, a_result, a_response )
+    {
+    var t = [ 'true-false', 'choice', 'fill-in',       'matching',  'sequencing',  'likert',  'numeric' ]
+    var r = [ 'correct',    'wrong',  'unanticipated', 'neutral' ]
+    var z = 'cmi.interactions.0'
+    var f = a_type >= 0 && a_type <= t.length
+    if (!f)
+      alert( 'Invalid value for cmi.nteractions.0.type = ' + a_type )
+    if (f)
+      {
+      f = a_result >= 0 && a_result <= r.length
+      if (!f)
+        alert( 'Invalid value for cmi.nteractions.0.result = ' + a_result )
+      }
+    if (f)
+      {
+      this.doLMSSetValue( z + '.id',                 a_id )
+      if (a_type)
+        this.doLMSSetValue( z + '.type',             t [ a_type - 1 ] )
+      if (a_result)
+        this.doLMSSetValue( z + '.result',           r [ a_result - 1 ] )
+      if (a_response != null)
+        this.doLMSSetValue( z + '.student_response', a_response )
+      }
+    }//interaction
+
+
+
+
+  this.objective = function( nn, a_id, a_status, a_score )
+    {
+    var z = 'cmi.objectives.' + nn
+    var s = [ 'passed', 'failed', 'completed', 'imcomplete', 'browsed', 'not attempted' ]
+    var f = a_status >= 0 && a_status <= s.length
+    if (!f)
+      alert( 'Invalid value for ' + z + ' = ' + a_status )
+    if (f)
+      {
+      this.doLMSSetValue( z + '.id',           a_id )
+      if (a_status)
+        {
+        this.doLMSSetValue( z + '.status',     s [ a_status-1 ] )
+        activity_status.push (s [ a_status-1 ])
+        }
+      if (a_score != null)
+        this.doLMSSetValue( z + '.score.raw',  a_score )
+      }
+    }
+
+  this.score_item = function( n, a_score, xx)
+    {
+    if (xx)
+      activity_score = new Array(xx)  // For Prediction & Pre-Listening_Info-Type
+    if (!(activity_score[n]>=0))
+      activity_score[n] = a_score
+    else if (score_exists)
+      activity_score[n] = parseInt(Math.round((activity_score[n] + a_score)/2))
+    }
+  //DLIFLC_SCORM_WRAPPERAPI_class
+}
+</script>
+<script language="JavaScript">
+//=========================================================================
+function initActy()
+  {
+  }
+
+function xid( a )
+  {
+  return document.getElementById( a )
+  }
+
+function pageReload()
+  {
+  window.location.reload()
+  }
+
+window.onload = function()
+  {
+  if (window.DSW)
+    DSW.pg_load()
+  initActy()
+  }
+window.onunload = function()
+  {
+  if (window.DSW)
+    DSW.pg_unload()
+  }
+
+//=========================================================================
+</script>
+</head>
+
+<frameset rows="1,*" frameborder="no" border="0" framespacing="0">
+  <frame src="blank.htm" name="topFrame" scrolling="NO" noresize >
+  <frame src="cc_bc_LSK/default.html" name="mainFrame">
+</frameset>
+<noframes><body>
+</body></noframes>
+</html>

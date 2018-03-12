@@ -1,0 +1,365 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"> 
+<html> 
+<head> 
+<!-- 
+Copyright (c)    : DLIFLC 2006 
+--> 
+<title>Online Language Survival Kit</title> 
+
+ 
+<meta http-equiv="Content-Type"  content="text/html; charset=utf-8"> 
+<meta http-equiv="Content-Language"  content="en"> 
+<meta http-equiv="Cache-Control" content="no-cache"> 
+<meta http-equiv="pragma"    content="no-cache"> 
+<meta http-equiv="Expires"   content="0"> 
+<meta name="Author"      content="DLIFLC"> 
+<meta name="Robots"      content="noindex"> 
+
+ 
+<script type="text/javascript" src="bypass.js"></script> 
+<script type="text/javascript" src="print.js"></script> 
+<link href="lsk_standard.css" rel="stylesheet" type="text/css"> 
+<script language="Javascript" type="text/Javascript"> 
+//==================== Start Standard Javascript Include ====================== 
+
+ 
+function MM_swapImgRestore() { //v3.0 
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc; 
+}MM_swapImgRestore 
+
+ 
+function MM_preloadImages() { //v3.0 
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array(); 
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++) 
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}} 
+}MM_preloadImages 
+
+ 
+function MM_findObj(n, d) { //v4.01 
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) { 
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);} 
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n]; 
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document); 
+  if(!x && d.getElementById) x=d.getElementById(n); return x; 
+}//MM_findObj 
+
+ 
+function MM_swapImage() { //v3.0 
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3) 
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];} 
+}//MM_swapImage 
+
+ 
+function getPage() 
+  { 
+  document.navForm.cmd.value = getPage.arguments[0] 
+  document.navForm.lang.value = getPage.arguments[1] 
+  document.navForm.langDir.value = getPage.arguments[2] 
+    document.navForm.id.value = getPage.arguments[3] 
+  document.navForm.submit() 
+  } 
+
+ 
+function loadAud(lang, fileName) 
+  { 
+  fileName = "media/" + lang + "/" + fileName + ".mp3" 
+  window.document.audPlayer.SetVariable("audFile", fileName); 
+  } 
+
+ 
+function w_open( url, ww, hh ) 
+  { 
+  var p = "toolbar=0, scrollbars=1, menubar=0, resizable=1, status=0, location=0, directories=0, width=" + ww + ", height=" + hh 
+  window.open(url,"_blank",p) 
+  }//w_open 
+
+ 
+//===================== End Standard Javascript Include ======================= 
+ 
+</script> 
+ 
+</head> 
+<body> 
+<div align="center"> 
+<!-- Begin top graphic//--> 
+<form action="default.asp" method="post" name="navForm"> 
+<table width="700" border="0" cellspacing="0" cellpadding="0"> 
+  <tr> 
+    <td width="405" height="24"> 
+      <img src="graphics/bctopCap.jpg" width="405" height="24" alt=""></td> 
+    <td width="225" height="24" align="right"> 
+      <a href="javascript:w_open('instructions.html',415,510)" title="Get Instructions"><img src="graphics/instruction.jpg" width="225" height="24" alt="Get Instructions" border="0"></a></td> 
+    <td width="70" height="24"> 
+      <img src="graphics/bcCap.jpg" width="70" height="24" alt=""></td> 
+  </tr> 
+  <tr> 
+    <td colspan="3" height="86"> 
+      <img src="graphics/bcMain.jpg" width="700" height="86" alt="main picture"></td> 
+  </tr> 
+</table> 
+<table width="700" border="0" cellspacing="0" cellpadding="0"> 
+  <tr> 
+    <td colspan="5" align="right"> 
+    <img src="graphics/bcTitle.jpg" width="700" height="20" alt="Title Bar"></td> 
+  </tr> 
+  <tr> 
+    <td rowspan="2" width="2" height="20" bgcolor="#646464" valign="top"> 
+   <img src="graphics/edgeTL.gif" width="2" height="20" alt=""></td> 
+ <td rowspan="2" width="4" height="20" bgcolor="#868686" valign="top"> 
+   <img src="graphics/edgeTLbase.gif" width="4" height="20" alt=""></td> 
+ <td width="688" height="2"  bgcolor="#868686" valign="top"> 
+   <img src="graphics/edgeT.gif" width="688" height="2" alt=""></td> 
+ <td rowspan="2" width="4" height="20" bgcolor="#868686" valign="top"> 
+   <img src="graphics/edgeTR2.gif" width="4" height="20" alt=""></td> 
+ <td rowspan="2" width="2" height="20" bgcolor="#646464" valign="top"> 
+   <img src="graphics/edgeTR.gif" width="2" height="20" alt=""></td> 
+  </tr> 
+  <tr> 
+    <td width="688" height="18" bgcolor="#868686"> 
+      <div> 
+  <table width="688" border="0" cellspacing="0" cellpadding="0"> 
+    <tr> 
+      <td width="48" valign="top"> 
+        <img src="graphics/1px.gif" width="48" height="18" border="0" alt=""></td> 
+      <td width="48" valign="top"> 
+        <img src="graphics/1px.gif" width="48" height="18" border="0" alt=""></td> 
+      <td width="49" valign="top"></td> 
+      <td width="466"> 
+        <img src="graphics/bcHeader_0.gif" width="425" height="18" alt=""></td> 
+      <td width="15"> 
+        <a href="javascript:prv_pg()" title="Previous Page"><img id="id_prev_pg" src="graphics/1px.gif" width="15" height="18" alt="previous page" border="0"></a></td> 
+      <td width="96" align="center"><img name="id_page" src="graphics/1px.gif" width="20" height="18" alt=""><img src="graphics/1px.gif" width="20" height="18" alt=""><img name="id_pages" src="graphics/1px.gif" width="20" height="18" alt=""></td> 
+      <td width="15"> 
+        <img id="id_next_pg" src="graphics/1px.gif" width="15" height="18" alt="" border="0"></td> 
+    </tr> 
+  </table> 
+      </div> 
+    </td> 
+  </tr> 
+  <tr> 
+    <td colspan="5" height="4"> 
+   <img src="graphics/edgeBT.gif" width="700" height="4" alt=""></td> 
+  </tr> 
+  <tr> 
+  <td width="2" bgcolor="#646464"> 
+      <img src="graphics/1px.gif" width="2" alt=""></td> 
+  <td colspan="3" bgcolor="#EDEDE6" align="left" valign="top"> 
+      <img src="graphics/1px.gif" height="2" width="688" alt=""></td> 
+  <td width="2" bgcolor="#646464"> 
+      <img src="graphics/1px.gif" width="2" alt=""></td> 
+  </tr> 
+  <tr> 
+  <td width="2" bgcolor="#646464"> 
+ <img src="graphics/1px.gif" width="2" alt=""></td> 
+   <td colspan="3" bgcolor="#EDEDE6" align="left" valign="top"> 
+ 
+  <div style="overflow:auto;"> 
+  <table width="670" border="0" cellspacing="0" cellpadding="0"> 
+    <tr> 
+      <td colspan="4" width="670" align="right"> 
+        <img src="graphics/1px.gif" width="670" height="20" alt=""></td> 
+    </tr> 
+    <tr> 
+      <td colspan="4" width="670" align="left"> 
+  <table cellspacing="0" cellpadding="0" width="670" border="0" align="center"> 
+    <tr> 
+      <td id="id_anc"> 
+    <table width="100%" border="0" cellpadding="0" style="margin-left:10"> 
+  <tr> 
+    <td> 
+      <table align="center" width="80%" cellspacing="0" cellpadding="0" border="0"> 
+        <tr> 
+          <td align="right"> 
+            <a href="cc_bc_audio.zip"><img src="graphics/download_audio.gif" border ="0" alt="Download Audio Files"></a></td> 
+          <td> 
+            <img src="graphics/1px.gif" width="50" height="1" border ="0" alt=""></td> 
+          <td align="left"> 
+            <a href="cc_bc_pdf.zip"><img src="graphics/download_pdf.gif" border ="0" alt="Download Printable PDF"></a></td> 
+          <td> 
+            <img src="graphics/1px.gif" width="50" height="1" border ="0" alt=""></td> 
+          <td align="right"> 
+            <a href="cc_bc_pda.zip"><img src="graphics/download_pda.gif" border ="0" alt="Download PDA Version"></a></td> 
+        </tr> 
+        <tr> 
+          <td colspan="6"> 
+            <img src="graphics/1px.gif" height="15" width="10" alt="" border="0"></td> 
+        </tr> 
+        <tr> 
+          <td colspan="6" style="background-color: #666666"> 
+            <img src="graphics/1px.gif" height="1" width="100%" alt="" border="0"></td> 
+        </tr> 
+        <tr> 
+          <td colspan="6"> 
+            <img src="graphics/1px.gif" height="15" width="10" alt="" border="0"></td> 
+        </tr> 
+      </table> 
+    </td> 
+  </tr> 
+  <tr> 
+    <td> 
+      <a href="sound.html" class="css_link" title="SOUNDS UNFAMILIAR TO ENGLISH SPEAKERS">SOUNDS UNFAMILIAR TO ENGLISH SPEAKERS</a><br><br></td> 
+  </tr> 
+       <tr> 
+         <td> 
+      <a href="module1.html" class="css_link" title="COMMANDS, WARNINGS &amp; INSTRUCTIONS">COMMANDS, WARNINGS &amp; INSTRUCTIONS</a></td> 
+      </tr> 
+       <tr> 
+         <td> 
+      <a href="module2.html" class="css_link" title="HELPFUL WORDS, PHRASES AND QUESTIONS">HELPFUL WORDS, PHRASES AND QUESTIONS</a></td> 
+      </tr> 
+       <tr> 
+         <td> 
+      <a href="module3.html" class="css_link" title="GREETINGS &amp; INTRODUCTIONS">GREETINGS &amp; INTRODUCTIONS</a></td> 
+      </tr> 
+       <tr> 
+         <td> 
+      <a href="module4.html" class="css_link" title="INTERROGATION">INTERROGATION</a></td> 
+      </tr> 
+       <tr> 
+         <td> 
+      <a href="module5.html" class="css_link" title="NUMBERS">NUMBERS</a></td> 
+      </tr> 
+       <tr> 
+         <td> 
+      <a href="module6.html" class="css_link" title="DAYS OF THE WEEK / TIME">DAYS OF THE WEEK / TIME</a></td> 
+      </tr> 
+       <tr> 
+         <td> 
+      <a href="module7.html" class="css_link" title="DIRECTIONS">DIRECTIONS</a></td> 
+      </tr> 
+       <tr> 
+         <td> 
+      <a href="module8.html" class="css_link" title="LOCATIONS">LOCATIONS</a></td> 
+      </tr> 
+       <tr> 
+         <td> 
+      <a href="module9.html" class="css_link" title="DESCRIPTIONS">DESCRIPTIONS</a></td> 
+      </tr> 
+       <tr> 
+         <td> 
+      <a href="module10.html" class="css_link" title="EMERGENCY TERMS">EMERGENCY TERMS</a></td> 
+      </tr> 
+       <tr> 
+         <td> 
+      <a href="module11.html" class="css_link" title="FOOD &amp; SANITATION">FOOD &amp; SANITATION</a></td> 
+      </tr> 
+       <tr> 
+         <td> 
+      <a href="module12.html" class="css_link" title="FUEL &amp; MAINTENANCE">FUEL &amp; MAINTENANCE</a></td> 
+      </tr> 
+       <tr> 
+         <td> 
+      <a href="module13.html" class="css_link" title="MEDICAL TERMS / GENERAL">MEDICAL TERMS / GENERAL</a></td> 
+      </tr> 
+       <tr> 
+         <td> 
+      <a href="module14.html" class="css_link" title="MEDICAL TERMS / PARTS OF THE BODY">MEDICAL TERMS / PARTS OF THE BODY</a></td> 
+      </tr> 
+       <tr> 
+         <td> 
+      <a href="module15.html" class="css_link" title="MILITARY RANKS">MILITARY RANKS</a></td> 
+      </tr> 
+       <tr> 
+         <td> 
+      <a href="module16.html" class="css_link" title="LODGING">LODGING</a></td> 
+      </tr> 
+       <tr> 
+         <td> 
+      <a href="module17.html" class="css_link" title="OCCUPATIONS">OCCUPATIONS</a></td> 
+      </tr> 
+       <tr> 
+         <td> 
+      <a href="module18.html" class="css_link" title="CUSTOMS (Port Of Entry)">CUSTOMS (Port Of Entry)</a></td> 
+      </tr> 
+       <tr> 
+         <td> 
+      <a href="module19.html" class="css_link" title="RELATIVES">RELATIVES</a></td> 
+      </tr> 
+       <tr> 
+         <td> 
+      <a href="module20.html" class="css_link" title="WEATHER">WEATHER</a></td> 
+      </tr> 
+       <tr> 
+         <td> 
+      <a href="module21.html" class="css_link" title="GENERAL MILITARY TERMS">GENERAL MILITARY TERMS</a></td> 
+      </tr> 
+       <tr> 
+         <td> 
+      <a href="module22.html" class="css_link" title="MINE WARFARE TERMS">MINE WARFARE TERMS</a></td> 
+      </tr> 
+    </table> 
+ 
+      </td> 
+    </tr> 
+    <tr> 
+      <td height="20">&nbsp;</td> 
+    </tr> 
+  </table> 
+      </td> 
+    </tr> 
+  </table> 
+  </div> 
+ 
+<!-- End content//--> 
+    </td> 
+    <td width="2" bgcolor="#646464"> 
+      <img src="graphics/1px.gif" width="2" alt=""></td> 
+  </tr> 
+    <tr> 
+ <td colspan="5" width="692" height="2"> 
+   <img src="graphics/edgeBB.gif" width="700" height="4" alt=""></td> 
+  </tr> 
+  <tr> 
+    <td rowspan="2" width="2" height="20" valign="bottom" bgcolor="#4A4A4A"> 
+   <img src="graphics/edgeBL.gif" width="2" height="20" alt=""></td> 
+ <td rowspan="2" width="4" height="20" valign="bottom"  bgcolor="#868686"> 
+   <img src="graphics/edgeBLbase.gif" width="4" height="20" alt=""></td> 
+    <td width="688" height="18" bgcolor="#868686"> 
+      <div> 
+  <table width="688" border="0" cellspacing="0" cellpadding="0"> 
+    <tr> 
+      <td width="49"  valign="bottom"> 
+         <img src="graphics/1px.gif" width="48" height="18" border="0" alt=""></td> 
+      <td width="48" valign="bottom"> 
+         <img src="graphics/1px.gif" width="48" height="18" border="0" alt=""></td> 
+      <td width="467" align="center"> 
+        <img src="graphics/copyright.gif" width="425" height="18" alt="copyright DLIFLC 2006"></td> 
+      <td width="15"> 
+      <a href="javascript:prv_pg()" title="Previous Page"><img id="id_prev_pgBtm" src="graphics/1px.gif" width="15" height="18" alt="previous page" border="0"></a></td> 
+    <td width="96" align="center"><img name="id_pageBtm" src="graphics/1px.gif" width="20" height="18" alt=""><img src="graphics/1px.gif" width="20" height="18" alt=""><img name="id_pagesBtm" src="graphics/1px.gif" width="20" height="18" alt=""></td> 
+      <td width="15"> 
+      <img id="id_next_pgBtm" src="graphics/1px.gif" width="15" height="18" alt="" border="0"></td> 
+    </tr> 
+  </table> 
+      </div> 
+    </td> 
+    <td rowspan="2" width="4" height="20" valign="bottom" bgcolor="#868686"> 
+   <img src="graphics/edgeBR2.gif" width="4" height="20" alt=""></td> 
+ <td rowspan="2" width="2" height="20" valign="bottom" bgcolor="#4A4A4A"> 
+      <img src="graphics/edgeBR.gif" width="2" height="20" alt=""></td> 
+  </tr> 
+  <tr> 
+    <td width="688" height="2"> 
+      <img src="graphics/edgeB.gif" width="688" height="2" alt=""></td> 
+  </tr> 
+</table> 
+<table width="688" cellspacing="0" cellpadding="0" border="0"> 
+  <tr> 
+    <td align="right"></td> 
+  </tr> 
+</table> 
+<input type="hidden" name="cmd" value=""> 
+<input type="hidden" name="lang" value=""> 
+<input type="hidden" name="langDir" value=""> 
+<input type="hidden" name="id" value=""> 
+<input type="hidden" name="playerType" value="0"> 
+</form> 
+<form name="pageForm" action=""> 
+<input type="hidden" name="page" value="1"> 
+</form> 
+<div id="id_control" ></div> 
+<!-- End content frame//--> 
+ 
+</div> 
+</body> 
+</html> 
