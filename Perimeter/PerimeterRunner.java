@@ -36,26 +36,39 @@ public class PerimeterRunner {
     //q2 everage length
     public double averageLength(Shape s){
         double avrl=0;
+        double total=0;
         Point prevPt = s.getLastPoint();
-        System.out.println("prevPoint is ("+prevPt.getX()+","+prevPt.getY()+")");
+        //System.out.println("prevPoint is ("+prevPt.getX()+","+prevPt.getY()+")");
         for(Point currPt:s.getPoints()){
             double currDist = prevPt.distance(currPt);
+            prevPt = currPt;
             System.out.println("current distance is "+currDist);
-            avrl = (avrl + currDist)/2.0;
-            System.out.println("average length is  "+avrl);
+            total = total + currDist;
+            //System.out.println("average length is  "+avrl);
         }
+        avrl = total/getNumPoints(s);
         return avrl;
+    }
+    public int getNumPoints(Shape s){
+        int count =0;
+        for(Point p:s.getPoints()){
+            count = count+1;
+        }
+        return count;
     }
     public double longestSide(Shape s){
         double longest = 0;
         Point prevPt = s.getLastPoint();
+        System.out.println("prevPt "+prevPt);
         for(Point currPt:s.getPoints()){
             double currDist = prevPt.distance(currPt);
+            prevPt = currPt;
+            System.out.println("currDist "+currDist);
             if(currDist > longest){
                 longest = currDist;
             }
         }
-        //System.out.printl
+        System.out.println("longest "+longest);
         return longest;
     }
     public void testLongest(){
