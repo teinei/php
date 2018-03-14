@@ -1,0 +1,62 @@
+{
+   "convertButton": {
+      "description": "Convert button",
+      "message": "Convertire le Fichier"
+   },
+   "convertToPdfCommand": {
+      "description": "Open addon popup shortcut command",
+      "message": "Raccourcis de conversion"
+   },
+   "extensionDescription": {
+      "description": "Description of the extension.",
+      "message": "Sauvegarder vos page web en format PDF"
+   },
+   "extensionName": {
+      "description": "Name of the extension.",
+      "message": "Convert WebPage To PDF"
+   },
+   "notificationGenerateFailledContextMessage": {
+      "description": "Notification failled conext message",
+      "message": "Re-essayer plus tard"
+   },
+   "notificationGenerateFailledMessage": {
+      "description": "Notification Failled  message",
+      "message": "Erreur lors de la generation du pdf"
+   },
+   "notificationGenerateFailledTitle": {
+      "description": "Notification Failled  title",
+      "message": "Erreur"
+   },
+   "notificationGenerateSuccessContextMessage": {
+      "description": "Notification success  context message",
+      "message": ""
+   },
+   "notificationGenerateSuccessMessage": {
+      "description": "Notification success  message",
+      "message": "Votre pdf a ete generer avec succes"
+   },
+   "notificationGenerateSuccessTitle": {
+      "description": "Notification Failled  title",
+      "message": "Succes"
+   },
+   "notificationProgressMessage": {
+      "description": "Notification progress  message",
+      "message": "Patienter svp"
+   },
+   "notificationProgressTitle": {
+      "description": "Notification progress  title",
+      "message": "Generation en cours"
+   },
+   "openFileButton": {
+      "description": "Notification progress  title",
+      "message": "Ouvrir le fichier"
+   },
+   "pageActionPopupTitle": {
+      "description": "Page Action popup title",
+      "message": "Option de conversation"
+   },
+   "retryButton": {
+      "description": "Notification progress  title",
+      "message": "Re-essayer"
+   }
+}

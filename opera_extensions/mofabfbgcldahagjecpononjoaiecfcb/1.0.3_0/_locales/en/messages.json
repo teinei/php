@@ -1,0 +1,62 @@
+{
+   "convertButton": {
+      "description": "Convert button",
+      "message": "Convert File"
+   },
+   "convertToPdfCommand": {
+      "description": "Open addon popup shortcut command",
+      "message": "Convert page to pdf shortcut"
+   },
+   "extensionDescription": {
+      "description": "Description of the extension.",
+      "message": "Save Web Page To PDF Format"
+   },
+   "extensionName": {
+      "description": "Name of the extension.",
+      "message": "Convert WebPage To PDF"
+   },
+   "notificationGenerateFailledContextMessage": {
+      "description": "Notification failled conext message",
+      "message": "Please retry later"
+   },
+   "notificationGenerateFailledMessage": {
+      "description": "Notification Failled  message",
+      "message": "Error While Generating pdf"
+   },
+   "notificationGenerateFailledTitle": {
+      "description": "Notification Failled  title",
+      "message": "Error"
+   },
+   "notificationGenerateSuccessContextMessage": {
+      "description": "Notification success  context message",
+      "message": "click on text to send us feed back"
+   },
+   "notificationGenerateSuccessMessage": {
+      "description": "Notification success  message",
+      "message": "Pdf generated successfully"
+   },
+   "notificationGenerateSuccessTitle": {
+      "description": "Notification Failled  title",
+      "message": "Success"
+   },
+   "notificationProgressMessage": {
+      "description": "Notification progress  message",
+      "message": "Please wait"
+   },
+   "notificationProgressTitle": {
+      "description": "Notification progress  title",
+      "message": "Generating pdf"
+   },
+   "openFileButton": {
+      "description": "Notification progress  title",
+      "message": "Open File"
+   },
+   "pageActionPopupTitle": {
+      "description": "Page Action popup title",
+      "message": "Convert Option"
+   },
+   "retryButton": {
+      "description": "Notification progress  title",
+      "message": "Retry"
+   }
+}

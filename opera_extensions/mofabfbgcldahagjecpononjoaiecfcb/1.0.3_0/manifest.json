@@ -1,0 +1,45 @@
+{
+   "author": "Moussa Ndour",
+   "background": {
+      "scripts": [ "background.js" ]
+   },
+   "commands": {
+      "convert-to-pdf": {
+         "description": "__MSG_convertToPdfCommand__",
+         "suggested_key": {
+            "default": "Ctrl+Shift+P"
+         }
+      }
+   },
+   "content_scripts": [ {
+      "js": [ "lib/js/jquery.min.js", "lib/js/download.min.js", "async-await.js", "misc.js", "controller.js" ],
+      "matches": [ "*://*/*" ],
+      "run_at": "document_end"
+   } ],
+   "default_locale": "en",
+   "description": "__MSG_extensionDescription__",
+   "developer": {
+      "name": "Moussa Ndour",
+      "url": "https://sidson-aidson-pdf-server.herokuapp.com/"
+   },
+   "homepage_url": "https://sidson-aidson-pdf-server.herokuapp.com/",
+   "icons": {
+      "32": "ico/addon-ico-32.png",
+      "64": "ico/addon-ico-64.png"
+   },
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA2mEl9PGjQjB3kzVY4uRLSL9cnsfiOQb4M6vxL0FEJJKAU8DTSU7tb42GH2dKvOVv8QojeiHFzrxsq0quW/T9Mf2WMKpFalj5U2NLDhc3HGiAgvLM1R2lMRyfeowEEHvkKoTBKy61nEeI4otVJDB/XMqdka1roiRF/JccbRbG1oZ3BgCCyEXWI+Eza9VLAmfS/exJjc4XKWiT+voVWG8/iD9KkE3l4YKPTCWqHSNl8DzhWi1zbRfpIAz8mJeFG62jEoqznINTt5gzb2PxWDQcJOPs5HlHXZ9ExGiuJ9puQ/Ou0YBXW/7GOt7B42a7AKcHncETMpoFF5ouP0OHhGlXOQIDAQAB",
+   "manifest_version": 2,
+   "name": "__MSG_extensionName__",
+   "page_action": {
+      "default_icon": {
+         "32": "ico/addon-ico-32.png",
+         "64": "ico/addon-ico-64.png"
+      },
+      "default_popup": "html/option.html",
+      "default_title": "__MSG_pageActionPopupTitle__"
+   },
+   "permissions": [ "*://*/*", "webRequest", "tabs", "activeTab", "notifications", "downloads", "downloads.open" ],
+   "update_url": "https://extension-updates.opera.com/api/omaha/update/",
+   "version": "1.0.3",
+   "web_accessible_resources": [ "ico/addon-ico-32.png", "ico/addon-ico-64.png", "ico/success.png", "ico/error.png", "ico/loading.png", "ico/logo.png" ]
+}
