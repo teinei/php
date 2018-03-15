@@ -1,0 +1,59 @@
+var image = null;
+//var canvas = null;
+var finput = null;//file input
+//finput = document.getElementById("fid");
+//image = new SimpleImage(finput);//
+function upload() {
+   //finput = document.getElementById("fid");
+  //get file input element by its id
+
+  //canvas = document.getElementById("canvid");
+  //this line is useless to display the image
+
+  //get canvas element by its id
+  image=new SimpleImage(fid);
+  //image = new SimpleImage(finput);//
+  //create simple image variable, from html input itself
+  //---------------
+  //bug code:
+  //image = new SimpleImage("a");
+
+    //document.writeln("<br>"+"var image: "+image+",in upload");
+    //document.writeln("<br>"+"var finput: "+finput+",in upload");
+    //image.drawTo(canvid);
+    
+    //another way to draw to canvas
+    var canvjs=document.getElementById("canvid");
+    image.drawTo(canvjs);
+    //
+    
+    document.getElementById("imglog").innerHTML ="<br>"+"var image: "+image+" upload";
+    document.getElementById("inputlog").innerHTML ="<br>"+"var input: "+finput+" upload";
+  //display image, draw to id directly
+  //buggy code: use var vanvas instead of id, did not work
+  //image.drawTo(canvas);
+}
+//choose file
+//upload
+//display\
+
+//grayscale
+
+function makeGray(){
+
+    for(var pixel of image.values()){ //loop through each pixel
+    //
+        var avg = (pixel.getRed() +pixel.getBlue() + pixel.getGreen() ) /3;
+        pixel.setRed(avg);
+        pixel.setGreen(avg);
+        pixel.setBlue(avg);
+    }
+    var canvjs=document.getElementById("canvid");
+    //image.drawTo(canvid);
+    image.drawTo(canvjs);
+    document.getElementById("imglog").innerHTML ="<br>"+"var image: "+image+" gray";
+    document.getElementById("inputlog").innerHTML ="<br>"+"var input: "+finput+" gray";
+}
+document.getElementById("imglog").innerHTML ="<br>"+"var image: "+image;
+document.getElementById("inputlog").innerHTML ="<br>"+"var input: "+finput;
+

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>321_fin-commented</title>
+      <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+<h1>buggy version</h1>
+<!-- html body -->
+<!-- -->
+<!-- SimpleImage js -->
+<script
+  src="js/SimpleImage.js"
+>
+</script>
+<!-- include js -->
+
+<!-- // -->
+<!-- //file button for upload -->
+<p>
+<input type="file" multiple="false" accept="image/*"
+id="fid"
+onchange="upload()" />
+</p>
+
+<p>
+  <input
+  id = "grayid"
+  type = "button"
+  value = "grayscale"
+  onclick="makeGray()"
+  />
+</p>
+
+
+<canvas id="canvid">
+</canvas>
+
+<p id="imglog">
+</p>
+<p id="inputlog">
+</p>
+
+    <script  src="js/index.js"></script>
+<!-- html body -->
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>323</title>
+      <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+<h1>char to number</h1>
+<p>
+    <input type="text" id="c2iTxt"
+    />
+    <input type="button" id="c2iBtn" value="char to int" onclick="charToInt()"/>
+</p>
+
+<h1>323 greenscreen</h1>
+<!-- html body -->
+<!-- -->
+<!-- SimpleImage js -->
+<script
+  src="js/SimpleImage.js"
+>
+</script>
+<!-- include js -->
+
+<!-- // -->
+<!-- //file button for upload -->
+<p>
+<input type="file" multiple="false" accept="image/*"
+id="fgfile"
+onchange="loadForegroundImage()" />
+
+<input type="file" multiple="false" accept="image/*"
+id="bgfile"
+onchange="loadBackgroundImage()" />
+</p>
+
+<p>
+  <input
+  id = "green-btn-id"
+  type = "button"
+  value = "create composite"
+  onclick="doGreenScreen()"
+  />
+</p>
+
+
+<canvas id="fgcan">
+</canvas>
+<canvas id="bgcan">
+</canvas>
+
+<p id="imglog">
+</p>
+<p id="inputlog">
+test
+</p>
+
+    <script  src="js/index.js"></script>
+<!-- html body -->
+</body>
+
+</html>
