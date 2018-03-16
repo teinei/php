@@ -15,6 +15,7 @@ public class AllGenesStored {
         //System.out.println("startIndex is "+startIndex);
         //      
         int i=0;
+        int geneCount=0;
         //
         while(true){
             //System.out.println("1)i is "+i);
@@ -25,10 +26,12 @@ public class AllGenesStored {
             //System.out.println("4)currentGene is "+currentGene);
             if(currentGene.isEmpty()){
                 //leave this loop
+                //System.out.println("There are "+geneCount+" genes");
                 break;
             }
             //
             geneList.add(currentGene);
+            geneCount=geneCount+1;
             //System.out.println(currentGene);
             //System.out.println();
             startIndex=dna.indexOf(currentGene,startIndex)+
@@ -39,22 +42,69 @@ public class AllGenesStored {
             //i++;
             //System.out.println("6)new i "+i);
             //System.out.println("-------");
+            
         }
-        //System.out.println("========");
+        //System.out.println("There are "+geneCount+" genes");
+        //above line will not print
         return geneList;
     }
+    public double cgRatio(String dna){
+        //iterate over string, loop though
+        int c=0;
+        int g=0;
+        for(char ch:dna.toCharArray()){
+            //
+            if(ch=='C')c=c+1;
+            if(ch=='G')g=g+1;            
+        }
+        //System.out.println("c/g ration is "+c+"/"+g);
+        return (double)c/g;
+    }
+    /*public int codonCount(String dna,String codon){
+        if(
+        return 0;
+    }*/
     public void testOn(String dna){
         System.out.println("testing printAllGenes on "+dna);
         StorageResource genes = getAllGenes(dna);
+        //q3 how many genes
+        int count=0;
+        int q4=0;
+        int q5=0;
+        double cgr=0.0;
+        int q6=0;
+        int q7=0;//longest dna length
+        //String longest="";//longest dna
         for(String g:genes.data()){
-            System.out.println(g);
+            //System.out.println(g);
+            count=count+1;////q3
+            if(g.length()>60) q4=q4+1;//q4
+            //--------------
+            cgr = cgRatio(g);
+            if(cgr>0.35) q5=q5+1;
+            int l=g.length();
+            if(l>q7)q7=l;            
         }
+        System.out.println("-----");
+        System.out.println("there are "+count+" genes");
+        System.out.println("-----");
+        System.out.println("there are "+q4+" genes longer then 60");
+        System.out.println("-----");
+        System.out.println("there are "+q5+" genes cg ragio greater than 0.35");
+        System.out.println("-----");
+        System.out.println("the length of longest gene is "+q7);
     }
     public void test(){
+        FileResource fr=new FileResource("GRch38dnapart.fa");
+        String dna=fr.asString();//convert file resource to string
+        testOn(dna);
+        
+        /*
         testOn("ATGATCTAAXXXYYY");
         testOn("ATGATCTAATTTATGCTGCTGCAACGGTGAAGA");
         testOn("");
         testOn("ATGATCATAAGAAGATAATAGAGGGCCATGTAA");
+        */
     }
     //code from previous
      public int findStopCodon(String dnaStr, 
